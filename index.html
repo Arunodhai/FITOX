@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Fitox Fitness Club | Premium Unisex Gym in Karunagappally</title>
   <meta name="description" content="Transform your physique at Karunagappally's top-rated fitness hub. Expert personal training, high-end equipment, and dedicated women's fitness at Hospital Junction." />
   <meta name="keywords" content="Fitox Fitness Club, Gym in Karunagappally, Best Unisex Gym Kollam, Ladies Fitness Karunagappally, Personal Trainer Karunagappally" />
@@ -45,7 +45,7 @@
       "longitude": 76.5349748
     },
     "url": "https://yourdomain.com",
-    "telephone": "+91-0000000000",
+    "telephone": "+91-9539443090",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -401,7 +401,17 @@
       color: var(--white2); line-height: 1.7;
       margin-bottom: 24px;
     }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; }
+    .hero-ctas { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .hero-cta-main { width: 100%; justify-content: center; }
+    .hero-ctas-row2 { display: flex; gap: 10px; }
+    .hero-cta-half { flex: 1; justify-content: center; }
+    /* Desktop: row layout */
+    @media (min-width: 769px) {
+      .hero-ctas { flex-direction: row; align-items: center; flex-wrap: wrap; }
+      .hero-cta-main { width: auto; }
+      .hero-ctas-row2 { flex: 0 0 auto; }
+      .hero-cta-half { flex: 0 0 auto; }
+    }
     .hero-call-btn {
       display: inline-flex; align-items: center; gap: 12px;
       color: var(--white);
@@ -985,10 +995,26 @@
     #photo-strip {
       overflow: hidden;
       background: var(--dark);
+      position: relative;
+    }
+    @media (max-width: 768px) {
+      #photo-strip {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      #photo-strip::-webkit-scrollbar { display: none; }
+      #photo-strip .strip-track {
+        animation: none;
+      }
+      #photo-strip .strip-item {
+        scroll-snap-align: start;
+      }
     }
     .strip-track {
       display: flex; gap: 4px;
-      animation: strip 35s linear infinite;
+      animation: strip 16s linear infinite;
     }
     .strip-track:hover { animation-play-state: paused; }
     @keyframes strip { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -1429,11 +1455,12 @@
     </ul>
     <div class="drawer-footer">
       <button type="button" class="btn-primary" onclick="openModal('General'); closeMenu();" style="width:100%; justify-content: center; margin-bottom: 20px;">Join Now →</button>
-      <a href="tel:+910000000000" class="drawer-call">
+      <a href="tel:919539443090" class="drawer-call">
         <div class="icon">📞</div>
         <div>
           <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color: var(--grey); margin-bottom:3px;">Quick Call</div>
-          <div style="font-weight:600;">+91 00000 00000</div>
+          <div style="font-weight:600;">+91 95394 43090</div>
+              <div style="font-size:12px; color: var(--grey); margin-top:2px;">+91 70349 43090</div>
         </div>
       </a>
     </div>
@@ -1464,12 +1491,14 @@
           Experience Karunagappally's most advanced training environment with world-class machinery and elite coaching.
         </p>
         <div class="hero-ctas">
-          <button type="button" class="btn-primary" onclick="openModal('General')">Start Your Journey →</button>
-          <a href="#about" class="btn-outline">Explore Club</a>
-          <a href="tel:+910000000000" class="hero-call-btn">
-            <span class="call-icon">📞</span>
-            <span>Call Us Now</span>
-          </a>
+          <button type="button" class="btn-primary hero-cta-main" onclick="openModal('General')">Start Your Journey →</button>
+          <div class="hero-ctas-row2">
+            <a href="#about" class="btn-outline hero-cta-half">Explore Club</a>
+            <a href="tel:+919539443090" class="hero-call-btn hero-cta-half">
+              <span class="call-icon">📞</span>
+              <span>Call Us Now</span>
+            </a>
+          </div>
         </div>
         <div class="hero-stats">
           <div class="hero-stat">
@@ -1613,56 +1642,54 @@
         <p style="color: var(--grey); margin-top: 14px; font-size: 15px;">No hidden charges. No contracts. Just results.</p>
       </div>
       <div class="plans-grid reveal">
-        <!-- Plan A -->
+        <!-- Plan A: 3 Months -->
         <div class="plan-card">
-          <div class="plan-duration">01 · 1 Month</div>
-          <div class="plan-name">Starter</div>
+          <div class="plan-duration">01 · 3 Months</div>
+          <div class="plan-name">Quarterly</div>
           <div class="plan-divider"></div>
           <div class="plan-price-block">
-            <div class="plan-new-price"><span class="currency">₹</span>1,500</div>
-            <div class="plan-savings">Get Started Today</div>
+            <div class="plan-new-price"><span class="currency">₹</span>4,000</div>
+            <div class="plan-savings">₹1,333 / Month</div>
           </div>
           <div class="plan-features">
             <div class="plan-feature"><span class="plan-feature-check">✓</span> Full gym access</div>
             <div class="plan-feature"><span class="plan-feature-check">✓</span> All equipment included</div>
             <div class="plan-feature"><span class="plan-feature-check">✓</span> Locker facilities</div>
           </div>
-          <button type="button" class="btn-outline plan-btn" onclick="openModal('Starter - 1 Month')">Select Plan →</button>
+          <button type="button" class="btn-outline plan-btn" onclick="openModal('Quarterly - 3 Months')">Select Plan →</button>
         </div>
-        <!-- Plan B (Popular) -->
+        <!-- Plan B: 6 Months (Popular) -->
         <div class="plan-card popular">
-          <div class="popular-badge">Most Popular</div>
-          <div class="plan-duration">02 · 3 Months</div>
-          <div class="plan-name">Value Pack</div>
+          <div class="popular-badge">Best Value</div>
+          <div class="plan-duration">02 · 6 Months</div>
+          <div class="plan-name">Half Year</div>
           <div class="plan-divider"></div>
           <div class="plan-price-block">
-            <div class="plan-old-price">₹4,500</div>
-            <div class="plan-new-price"><span class="currency">₹</span>4,000</div>
-            <div class="plan-savings">Save 10%</div>
+            <div class="plan-new-price"><span class="currency">₹</span>8,000</div>
+            <div class="plan-savings">₹1,333 / Month</div>
           </div>
           <div class="plan-features">
-            <div class="plan-feature"><span class="plan-feature-check">✓</span> Everything in Starter</div>
+            <div class="plan-feature"><span class="plan-feature-check">✓</span> Everything in Quarterly</div>
             <div class="plan-feature"><span class="plan-feature-check">✓</span> Diet consultation</div>
             <div class="plan-feature"><span class="plan-feature-check">✓</span> Progress tracking</div>
           </div>
-          <button type="button" class="plan-btn-dark plan-btn" onclick="openModal('Value Pack - 3 Months')">Select Plan →</button>
+          <button type="button" class="plan-btn-dark plan-btn" onclick="openModal('Half Year - 6 Months')">Select Plan →</button>
         </div>
-        <!-- Plan C -->
+        <!-- Plan C: 1 Year -->
         <div class="plan-card">
-          <div class="plan-duration">03 · 12 Months</div>
-          <div class="plan-name">Elite Transformation</div>
+          <div class="plan-duration">03 · 1 Year</div>
+          <div class="plan-name">Elite Annual</div>
           <div class="plan-divider"></div>
           <div class="plan-price-block">
-            <div class="plan-old-price">₹18,000</div>
             <div class="plan-new-price"><span class="currency">₹</span>12,000</div>
-            <div class="plan-savings">Best Value — Save 33%</div>
+            <div class="plan-savings">₹1,000 / Month</div>
           </div>
           <div class="plan-features">
             <div class="plan-feature"><span class="plan-feature-check">✓</span> Full year unlimited access</div>
             <div class="plan-feature"><span class="plan-feature-check">✓</span> Personal training sessions</div>
             <div class="plan-feature"><span class="plan-feature-check">✓</span> Personalised diet plan</div>
           </div>
-          <button type="button" class="btn-primary plan-btn" onclick="openModal('Elite Transformation - 12 Months')">Select Plan →</button>
+          <button type="button" class="btn-primary plan-btn" onclick="openModal('Elite Annual - 1 Year')">Select Plan →</button>
         </div>
       </div>
       <p class="plans-note">* Prices are indicative. Contact us for exact pricing and current offers.</p>
@@ -1977,8 +2004,8 @@
         <h2 class="cta-band-title">YOUR BEST<br>BODY STARTS<br>NOW.</h2>
         <div class="cta-band-btns">
           <button type="button" class="cta-band-btn-black" onclick="openModal('General')">Join Fitox Now →</button>
-          <a href="tel:+910000000000" class="cta-band-phone">
-            📞 +91 00000 00000
+          <a href="tel:919539443090" class="cta-band-phone">
+            📞 +91 95394 43090
           </a>
         </div>
       </div>
@@ -2002,7 +2029,7 @@
           </div>
           <div class="footer-contact-item">
             <span class="ic">📞</span>
-            <a href="tel:+910000000000">+91 00000 00000</a>
+            <a href="tel:919539443090">+91 95394 43090</a>
           </div>
           <div class="footer-contact-item">
             <span class="ic">⏰</span>
@@ -2048,9 +2075,10 @@
       </div>
       <div class="footer-bottom">
         <p>© 2024 Fitox Fitness Club · Hospital Junction, Karunagappally · All Rights Reserved</p>
-        <a href="https://wa.me/910000000000" target="_blank" rel="noopener" class="footer-wa">
+        <a href="https://wa.me/919539443090" target="_blank" rel="noopener" class="footer-wa">
           💬 Chat on WhatsApp
         </a>
+        <a href="https://www.instagram.com/fitoxfitness/" target="_blank" rel="noopener" class="footer-wa" style="color: #E1306C;">📸 Follow on Instagram</a>
       </div>
     </div>
   </footer>
@@ -2098,9 +2126,9 @@
               <label for="f-type">Membership Type</label>
               <select id="f-type" name="membership_type">
                 <option value="" disabled selected>Select plan</option>
-                <option>Starter – 1 Month (₹1,500)</option>
-                <option>Value Pack – 3 Months (₹4,000)</option>
-                <option>Elite Transformation – 12 Months (₹12,000)</option>
+                <option>Quarterly – 3 Months (₹4,000)</option>
+                <option>Half Year – 6 Months (₹8,000)</option>
+                <option>Elite Annual – 1 Year (₹12,000)</option>
                 <option>Not sure yet</option>
               </select>
             </div>
@@ -2321,7 +2349,7 @@
       const slot = data.get('time_slot') || 'Flexible';
       const msg = (data.get('message') || '').trim();
 
-      const waNumber = '910000000000';
+      const waNumber = '919539443090';
       const waMsg = encodeURIComponent(
         `🔥 *New Lead — Fitox Fitness Club*\n\n` +
         `👤 *Name:* ${name}\n` +
@@ -2402,6 +2430,30 @@
         }
       });
     });
+
+    // --- PHOTO STRIP TOUCH SWIPE ---
+    const stripWrap = document.getElementById('photo-strip');
+    const stripTrack = stripWrap ? stripWrap.querySelector('.strip-track') : null;
+    if (stripTrack) {
+      let stripTouchX = 0, stripPaused = false;
+      stripWrap.addEventListener('touchstart', (e) => {
+        stripTouchX = e.touches[0].clientX;
+        stripTrack.style.animationPlayState = 'paused';
+        stripPaused = true;
+      }, { passive: true });
+      stripWrap.addEventListener('touchmove', (e) => {
+        if (!stripPaused) return;
+        const dx = e.touches[0].clientX - stripTouchX;
+        const current = new DOMMatrix(getComputedStyle(stripTrack).transform).m41;
+        stripTrack.style.transform = `translateX(${current + dx * 0.5}px)`;
+        stripTouchX = e.touches[0].clientX;
+      }, { passive: true });
+      stripWrap.addEventListener('touchend', () => {
+        stripTrack.style.animationPlayState = 'running';
+        stripTrack.style.transform = '';
+        stripPaused = false;
+      }, { passive: true });
+    }
   </script>
 
 </body>
