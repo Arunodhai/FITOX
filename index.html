@@ -2247,7 +2247,9 @@
       <div class="modal-body">
         <form id="lead-form" onsubmit="handleFormSubmit(event)">
           <!-- Hidden fields -->
-          <input type="hidden" name="endpoint" value="fitox_leads" />
+          <input type="hidden" name="access_key" value="b0c0f4c1-9159-4348-9488-ced163dc6d4c" />
+          <input type="hidden" name="subject" value="New FITOX Website Lead" />
+          <input type="hidden" name="from_name" value="FITOX Website" />
           <input type="hidden" name="selected_plan" id="hidden-plan" value="" />
 
           <div class="form-row">
@@ -2504,14 +2506,11 @@
         `Hi Fitox Team! I'd like to join the gym. Please get in touch with me.`
       );
 
-      const endpoint = 'https://formspree.io/f/your-form-id';
-      if (!endpoint.includes('your-form-id')) {
-        fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: data
-        }).catch(() => {});
-      }
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      }).catch(() => {});
 
       window.open(`https://wa.me/${waNumber}?text=${waMsg}`, '_blank', 'noopener,noreferrer');
       closeModal();
