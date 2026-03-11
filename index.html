@@ -326,8 +326,11 @@
     #hero {
       position: relative; height: 100vh; min-height: 600px;
       display: flex; flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
       overflow: hidden;
+    }
+    @supports (height: 100svh) {
+      #hero { height: 100svh; }
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
@@ -344,8 +347,8 @@
       .hero-slide:nth-child(1) { opacity: 1 !important; }
       .hero-slide:nth-child(2), .hero-slide:nth-child(3) { opacity: 0 !important; display: none; }
     }
-    .hero-slide:nth-child(1) { background-image: url('hero.png'); background-size: cover; background-position: center top; }
-    .hero-slide:nth-child(2) { background-image: url('hero2.jpg'); background-size: cover; background-position: center; }
+    .hero-slide:nth-child(1) { background-image: url('hero22.jpg'); background-size: cover; background-position: center top; }
+    .hero-slide:nth-child(2) { background-image: url('hero22.jpg'); background-size: cover; background-position: center; }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
       background:
@@ -354,7 +357,7 @@
     }
     @media (max-width: 768px) {
       .hero-overlay {
-        background: linear-gradient(to top, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.75) 50%, rgba(8,8,8,0.5) 100%);
+        background: linear-gradient(to top, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.82) 60%, rgba(8,8,8,0.4) 100%);
       }
     }
     .hero-geo-lines {
@@ -372,14 +375,14 @@
     }
     .hero-content {
       position: relative; z-index: 2;
-      padding: 70px 0 20px;
+      padding: 70px 0 60px;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 12px;
       font-family: var(--font-display);
       font-size: 11px; font-weight: 700;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--red); margin-bottom: 24px;
+      color: var(--red); margin-bottom: 14px;
     }
     .hero-eyebrow::before, .hero-eyebrow::after {
       content: ''; flex: 1; height: 1px; background: var(--red); opacity: 0.5;
@@ -411,7 +414,7 @@
       color: var(--white2); line-height: 1.7;
       margin-bottom: 24px;
     }
-    .hero-ctas { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .hero-ctas { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
     .hero-cta-main { width: 100%; justify-content: center; }
     .hero-ctas-row2 { display: flex; gap: 20px; align-items: center; justify-content: center; width: 100%; margin-top: 4px; }
     .hero-plain-link {
@@ -490,7 +493,7 @@
     .hero-stats {
       display: flex; flex-wrap: wrap; gap: 0;
       border-top: 1px solid var(--border);
-      padding-top: 20px;
+      padding-top: 14px;
     }
     .hero-stat {
       display: flex; flex-direction: column;
@@ -1455,7 +1458,7 @@
       .container { padding: 0 20px; }
       #about, #services, #plans, #programs, #transformations, #whyus, #reviews { padding: 80px 0; }
       .hero-eyebrow { display: inline-flex; font-size: 9px; letter-spacing: 0.18em; }
-      .hero-content { padding: 76px 0 12px !important; }
+      .hero-content { padding: 72px 0 56px !important; }
       .hero-ctas { flex-direction: column; }
       .hero-stats { gap: 16px; }
       /* hero-stat overridden by grid above */
@@ -1586,8 +1589,8 @@
             <span class="lbl">Google Rating</span>
           </div>
           <div class="hero-stat">
-            <span class="val">16+</span>
-            <span class="lbl">Hours Daily</span>
+            <span class="val">6</span>
+            <span class="lbl">Days Open</span>
           </div>
           <div class="hero-stat">
             <span class="val">05:30</span>
@@ -1667,10 +1670,6 @@
             <img class="about-slide" src="Interior/interior-7.png" alt="Fitox gym interior 7" loading="lazy" decoding="async" />
             <img class="about-slide" src="Interior/interior-8.png" alt="Fitox gym interior 8" loading="lazy" decoding="async" />
             <img class="about-slide" src="Interior/interior-9.png" alt="Fitox gym interior 9" loading="lazy" decoding="async" />
-          </div>
-          <div class="about-badge">
-            <div class="score">4.6</div>
-            <div class="label">Rating</div>
           </div>
           <div class="about-logo-thumb">
             <img src="logo.png" alt="Fitox" style="width:60px;height:auto;object-fit:contain;" />
