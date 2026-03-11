@@ -338,9 +338,8 @@
       opacity: 0; transition: opacity 1.2s ease;
     }
     .hero-slide.active { opacity: 1; }
-    .hero-slide:nth-child(1) { background-image: url('hero1.jpg'); background-size: cover; background-position: center top; }
+    .hero-slide:nth-child(1) { background-image: url('hero.png'); background-size: cover; background-position: center top; }
     .hero-slide:nth-child(2) { background-image: url('hero2.jpg'); background-size: cover; background-position: center; }
-    .hero-slide:nth-child(3) { background-image: url('hero3.jpg'); background-size: cover; background-position: center; }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
       background:
@@ -532,11 +531,19 @@
       background: var(--dark2);
       clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%);
       overflow: hidden;
+      position: relative;
     }
     .about-img-main img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
     }
+    .about-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .about-slide.active { opacity: 1; }
     .about-img-placeholder {
       width: 100%; height: 100%;
       background: linear-gradient(135deg, #1a1a1a 0%, #2a0a0a 100%);
@@ -586,23 +593,34 @@
     }
     .service-card {
       background: var(--dark2);
-      padding: 48px 40px;
+      padding: 0 40px 40px;
       position: relative; overflow: hidden;
       transition: background 0.3s;
     }
-    .service-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(208,0,0,0.06) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.3s;
+    .service-media {
+      width: calc(100% + 80px);
+      margin: 0 -40px 24px;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .service-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .service-card:hover { background: var(--dark3); }
-    .service-card:hover::before { opacity: 1; }
     .service-number {
       font-family: var(--font-display);
       font-size: 60px; font-weight: 900;
       color: rgba(208,0,0,0.12);
-      line-height: 1; margin-bottom: 20px;
+      line-height: 1;
+      position: absolute;
+      top: 10px;
+      left: 24px;
+      z-index: 2;
+      margin: 0;
     }
     .service-icon { font-size: 36px; margin-bottom: 20px; }
     .service-name {
@@ -614,17 +632,6 @@
     .service-desc {
       font-size: 14px; font-weight: 300;
       color: var(--white2); line-height: 1.7;
-    }
-    .service-arrow {
-      position: absolute; bottom: 30px; right: 30px;
-      width: 40px; height: 40px;
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: var(--grey);
-      transition: border-color 0.3s, color 0.3s, transform 0.3s;
-    }
-    .service-card:hover .service-arrow {
-      border-color: var(--red); color: var(--red); transform: rotate(45deg);
     }
 
     /* ============================================================
@@ -729,29 +736,27 @@
       gap: 24px; margin-top: 60px;
     }
     .program-card {
-      position: relative; overflow: hidden;
-      background: var(--dark2);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #171717, #111111);
+      border: 1px solid var(--border);
+      padding: 30px 28px;
       cursor: pointer;
     }
-    .program-img {
-      width: 100%; aspect-ratio: 4/3;
-      background: var(--dark3);
-      overflow: hidden; position: relative;
+    .program-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
     }
-    .program-img-inner {
-      width: 100%; height: 100%;
-      transition: transform 0.6s ease;
+    .program-index {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 900;
+      color: rgba(208,0,0,0.25);
+      line-height: 1;
     }
-    .program-card:hover .program-img-inner { transform: scale(1.05); }
-    .prog-img-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .prog-img-placeholder span { font-size: 60px; opacity: 0.3; }
-    .prog-gradient-1 { background: linear-gradient(135deg, #1a0202, #2d0000); }
-    .prog-gradient-2 { background: linear-gradient(135deg, #020a1a, #00152d); }
-    .prog-gradient-3 { background: linear-gradient(135deg, #0a1a02, #152d00); }
-    .program-body { padding: 30px 28px; }
+    .program-body { padding: 0; }
     .program-tag {
       display: inline-flex;
       font-family: var(--font-display);
@@ -791,52 +796,34 @@
       align-items: flex-end; margin-bottom: 50px;
     }
     .trans-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
+      overflow: hidden;
       margin-bottom: 50px;
     }
+    .trans-track {
+      display: flex;
+      gap: 6px;
+      width: max-content;
+      animation: transScroll 45s linear infinite;
+    }
+    @keyframes transScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     .trans-item {
-      aspect-ratio: 3/4;
+      width: 260px;
+      height: 340px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
       background: var(--dark2);
-      overflow: hidden; position: relative;
-      cursor: pointer;
     }
     .trans-img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
+      display: block;
     }
-    .trans-item:hover .trans-img { transform: scale(1.08); }
-    .trans-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 12px;
-    }
-    .trans-placeholder span { font-size: 40px; opacity: 0.2; }
-    .trans-placeholder p {
-      font-family: var(--font-display);
-      font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--grey);
-    }
-    .trans-gradient-1 { background: linear-gradient(160deg, #1a0202, #0d0d0d); }
-    .trans-gradient-2 { background: linear-gradient(160deg, #0d1a02, #0d0d0d); }
-    .trans-gradient-3 { background: linear-gradient(160deg, #021a0d, #0d0d0d); }
-    .trans-gradient-4 { background: linear-gradient(160deg, #02100d, #0d0d0d); }
-    .trans-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
-      opacity: 0; transition: opacity 0.4s;
-    }
-    .trans-item:hover .trans-overlay { opacity: 1; }
-    .trans-label {
-      position: absolute; bottom: 16px; left: 16px;
-      font-family: var(--font-display);
-      font-size: 10px; font-weight: 800; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--red);
-      opacity: 0; transition: opacity 0.4s;
-    }
-    .trans-item:hover .trans-label { opacity: 1; }
+    .trans-grid:hover .trans-track { animation-play-state: paused; }
     .trans-cta { text-align: center; }
 
     /* ============================================================
@@ -949,18 +936,14 @@
     .strip-item {
       flex-shrink: 0;
       width: 300px; height: 200px;
-      background: var(--dark2); overflow: hidden;
+      overflow: hidden;
     }
-    .strip-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 40px; opacity: 0.2;
+    .strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .strip-g1 { background: linear-gradient(135deg, #1a0202, #2d0000); }
-    .strip-g2 { background: linear-gradient(135deg, #0d1a10, #001f08); }
-    .strip-g3 { background: linear-gradient(135deg, #0d0d1a, #000018); }
-    .strip-g4 { background: linear-gradient(135deg, #1a1a02, #1a0000); }
-    .strip-g5 { background: linear-gradient(135deg, #1a0202, #2d0000); }
 
     /* ============================================================
        REVIEWS
@@ -1274,7 +1257,7 @@
       .services-grid { grid-template-columns: 1fr; gap: 2px; }
       .plans-grid { grid-template-columns: 1fr; gap: 2px; }
       .programs-grid { grid-template-columns: 1fr; gap: 20px; }
-      .trans-grid { grid-template-columns: 1fr 1fr; }
+      .trans-item { width: 220px; height: 300px; }
       .whyus-grid { grid-template-columns: 1fr; gap: 50px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .services-header { flex-direction: column; gap: 24px; align-items: flex-start; }
@@ -1291,7 +1274,7 @@
       .hero-ctas { flex-direction: column; }
       .hero-stats { gap: 16px; }
       .hero-stat { padding-right: 16px; margin-right: 16px; }
-      .trans-grid { grid-template-columns: 1fr; }
+      .trans-item { width: 190px; height: 260px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
@@ -1317,7 +1300,7 @@
     <div class="container">
       <div class="nav-inner">
         <a href="#hero" class="nav-brand">
-          <img src="logo.png" alt="Fitox Fitness Club Logo" class="nav-logo-img" width="192" height="44" />
+          <img src="logo1.png" alt="Fitox Fitness Club Logo" class="nav-logo-img" width="192" height="44" />
         </a>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
@@ -1462,12 +1445,15 @@
         </div>
         <div class="about-visual reveal-right">
           <div class="about-img-main">
-            <div class="about-img-placeholder">
-              <div style="text-align:center">
-                <div style="font-size:100px; opacity:0.1">🏋️</div>
-                <div style="font-family: var(--font-display); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color: var(--grey); margin-top:12px;">Gym Interior Photo</div>
-              </div>
-            </div>
+            <img class="about-slide active" src="Interior/interior-1.png" alt="Fitox gym interior 1" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-2.png" alt="Fitox gym interior 2" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-3.png" alt="Fitox gym interior 3" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-4.png" alt="Fitox gym interior 4" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-5.png" alt="Fitox gym interior 5" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-6.png" alt="Fitox gym interior 6" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-7.png" alt="Fitox gym interior 7" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-8.png" alt="Fitox gym interior 8" loading="lazy" decoding="async" />
+            <img class="about-slide" src="Interior/interior-9.png" alt="Fitox gym interior 9" loading="lazy" decoding="async" />
           </div>
           <div class="about-badge">
             <div class="score">4.6</div>
@@ -1496,24 +1482,27 @@
       <div class="services-grid reveal">
         <div class="service-card">
           <div class="service-number">01</div>
-          <div class="service-icon">🏋️</div>
+          <div class="service-media">
+            <img src="Services/strength-training.webp" alt="Strength training at Fitox" loading="lazy" decoding="async" />
+          </div>
           <h3 class="service-name">Strength Training</h3>
           <p class="service-desc">Advanced resistance machines and heavy-duty free weights for muscle hypertrophy and peak performance.</p>
-          <div class="service-arrow">→</div>
         </div>
         <div class="service-card">
           <div class="service-number">02</div>
-          <div class="service-icon">🏃</div>
+          <div class="service-media">
+            <img src="Services/cardio.avif" alt="Cardio training at Fitox" loading="lazy" decoding="async" />
+          </div>
           <h3 class="service-name">Cardio Blast</h3>
           <p class="service-desc">High-performance treadmills and cross-trainers for peak heart health and endurance conditioning.</p>
-          <div class="service-arrow">→</div>
         </div>
         <div class="service-card">
           <div class="service-number">03</div>
-          <div class="service-icon">👩</div>
+          <div class="service-media">
+            <img src="Services/ladies.jpg" alt="Ladies special training area at Fitox" loading="lazy" decoding="async" />
+          </div>
           <h3 class="service-name">Ladies Special</h3>
           <p class="service-desc">A secure, comfortable environment with specialized routines designed exclusively for women's fitness goals.</p>
-          <div class="service-arrow">→</div>
         </div>
       </div>
     </div>
@@ -1613,39 +1602,33 @@
       <h2 class="section-title reveal">FEATURED <span>PROGRAMS.</span></h2>
       <div class="programs-grid">
         <div class="program-card reveal">
-          <div class="program-img">
-            <div class="program-img-inner prog-gradient-1">
-              <div class="prog-img-placeholder"><span>🔥</span></div>
-            </div>
+          <div class="program-meta">
+            <div class="program-tag">90 Days</div>
+            <div class="program-index">01</div>
           </div>
           <div class="program-body">
-            <div class="program-tag">90 Days</div>
             <h3 class="program-name">The 90-Day Transformation</h3>
             <p class="program-desc">Integrated diet and workout plan for rapid, visible results. Fully customized to your body type and goals.</p>
           </div>
           <div class="program-hover-bar"></div>
         </div>
         <div class="program-card reveal" style="transition-delay: 0.1s;">
-          <div class="program-img">
-            <div class="program-img-inner prog-gradient-2">
-              <div class="prog-img-placeholder"><span>⚡</span></div>
-            </div>
+          <div class="program-meta">
+            <div class="program-tag">HIIT</div>
+            <div class="program-index">02</div>
           </div>
           <div class="program-body">
-            <div class="program-tag">HIIT</div>
             <h3 class="program-name">Functional HIIT</h3>
             <p class="program-desc">Burn maximum calories with high-intensity interval training. Build stamina, torch fat, and break plateaus.</p>
           </div>
           <div class="program-hover-bar"></div>
         </div>
         <div class="program-card reveal" style="transition-delay: 0.2s;">
-          <div class="program-img">
-            <div class="program-img-inner prog-gradient-3">
-              <div class="prog-img-placeholder"><span>💪</span></div>
-            </div>
+          <div class="program-meta">
+            <div class="program-tag">Recomposition</div>
+            <div class="program-index">03</div>
           </div>
           <div class="program-body">
-            <div class="program-tag">Recomposition</div>
             <h3 class="program-name">Body Recomposition</h3>
             <p class="program-desc">Lose fat while gaining lean muscle through expert-led hypertrophy sessions and science-backed nutrition.</p>
           </div>
@@ -1668,37 +1651,30 @@
         <button type="button" class="btn-primary reveal" onclick="openModal('General')">Start My Journey →</button>
       </div>
       <div class="trans-grid reveal">
-        <div class="trans-item">
-          <div class="trans-placeholder trans-gradient-1">
-            <span>📸</span>
-            <p>Before / After</p>
-          </div>
-          <div class="trans-overlay"></div>
-          <div class="trans-label">Member Result</div>
-        </div>
-        <div class="trans-item">
-          <div class="trans-placeholder trans-gradient-2">
-            <span>📸</span>
-            <p>Before / After</p>
-          </div>
-          <div class="trans-overlay"></div>
-          <div class="trans-label">Member Result</div>
-        </div>
-        <div class="trans-item">
-          <div class="trans-placeholder trans-gradient-3">
-            <span>📸</span>
-            <p>Before / After</p>
-          </div>
-          <div class="trans-overlay"></div>
-          <div class="trans-label">Member Result</div>
-        </div>
-        <div class="trans-item">
-          <div class="trans-placeholder trans-gradient-4">
-            <span>📸</span>
-            <p>Before / After</p>
-          </div>
-          <div class="trans-overlay"></div>
-          <div class="trans-label">Member Result</div>
+        <div class="trans-track">
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-1.png" alt="Fitox transformation result 1" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-2.png" alt="Fitox transformation result 2" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-3.png" alt="Fitox transformation result 3" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-4.png" alt="Fitox transformation result 4" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-5.png" alt="Fitox transformation result 5" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-6.png" alt="Fitox transformation result 6" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-7.png" alt="Fitox transformation result 7" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-8.png" alt="Fitox transformation result 8" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-9.png" alt="Fitox transformation result 9" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-10.png" alt="Fitox transformation result 10" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-11.png" alt="Fitox transformation result 11" loading="lazy" decoding="async" /></div>
+          <!-- Duplicate set for seamless right-to-left loop -->
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-1.png" alt="Fitox transformation result 1" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-2.png" alt="Fitox transformation result 2" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-3.png" alt="Fitox transformation result 3" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-4.png" alt="Fitox transformation result 4" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-5.png" alt="Fitox transformation result 5" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-6.png" alt="Fitox transformation result 6" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-7.png" alt="Fitox transformation result 7" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-8.png" alt="Fitox transformation result 8" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-9.png" alt="Fitox transformation result 9" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-10.png" alt="Fitox transformation result 10" loading="lazy" decoding="async" /></div>
+          <div class="trans-item"><img class="trans-img" src="Transformations/transformation-11.png" alt="Fitox transformation result 11" loading="lazy" decoding="async" /></div>
         </div>
       </div>
       <div class="trans-cta">
@@ -1770,23 +1746,23 @@
   ============================================================ -->
   <div id="photo-strip">
     <div class="strip-track">
-      <div class="strip-item strip-g1"><div class="strip-placeholder">🏋️</div></div>
-      <div class="strip-item strip-g2"><div class="strip-placeholder">🏃</div></div>
-      <div class="strip-item strip-g3"><div class="strip-placeholder">💪</div></div>
-      <div class="strip-item strip-g4"><div class="strip-placeholder">⚡</div></div>
-      <div class="strip-item strip-g5"><div class="strip-placeholder">🔥</div></div>
-      <div class="strip-item strip-g1"><div class="strip-placeholder">🎯</div></div>
-      <div class="strip-item strip-g2"><div class="strip-placeholder">🏆</div></div>
-      <div class="strip-item strip-g3"><div class="strip-placeholder">🧘</div></div>
-      <!-- Duplicate -->
-      <div class="strip-item strip-g4"><div class="strip-placeholder">🏋️</div></div>
-      <div class="strip-item strip-g5"><div class="strip-placeholder">🏃</div></div>
-      <div class="strip-item strip-g1"><div class="strip-placeholder">💪</div></div>
-      <div class="strip-item strip-g2"><div class="strip-placeholder">⚡</div></div>
-      <div class="strip-item strip-g3"><div class="strip-placeholder">🔥</div></div>
-      <div class="strip-item strip-g4"><div class="strip-placeholder">🎯</div></div>
-      <div class="strip-item strip-g5"><div class="strip-placeholder">🏆</div></div>
-      <div class="strip-item strip-g1"><div class="strip-placeholder">🧘</div></div>
+      <div class="strip-item"><img src="Interior/interior-1.png" alt="Fitox gym interior 1" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-2.png" alt="Fitox gym interior 2" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-3.png" alt="Fitox gym interior 3" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-4.png" alt="Fitox gym interior 4" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-5.png" alt="Fitox gym interior 5" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-6.png" alt="Fitox gym interior 6" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-7.png" alt="Fitox gym interior 7" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-8.png" alt="Fitox gym interior 8" loading="lazy" decoding="async" /></div>
+      <!-- Duplicate for smooth loop -->
+      <div class="strip-item"><img src="Interior/interior-1.png" alt="Fitox gym interior 1" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-2.png" alt="Fitox gym interior 2" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-3.png" alt="Fitox gym interior 3" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-4.png" alt="Fitox gym interior 4" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-5.png" alt="Fitox gym interior 5" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-6.png" alt="Fitox gym interior 6" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-7.png" alt="Fitox gym interior 7" loading="lazy" decoding="async" /></div>
+      <div class="strip-item"><img src="Interior/interior-8.png" alt="Fitox gym interior 8" loading="lazy" decoding="async" /></div>
     </div>
   </div>
 
@@ -2157,6 +2133,21 @@
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
       }, 5000);
+    }
+
+    // --- ABOUT INTERIOR SLIDESHOW ---
+    const aboutSlides = document.querySelectorAll('.about-slide');
+    if (!prefersReducedMotion && aboutSlides.length > 1) {
+      let aboutCurrent = 0;
+      setInterval(() => {
+        aboutSlides[aboutCurrent].classList.remove('active');
+        aboutCurrent = (aboutCurrent + 1) % aboutSlides.length;
+        aboutSlides[aboutCurrent].classList.add('active');
+      }, 2800);
+    } else {
+      aboutSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === 0);
+      });
     }
 
     // --- SCROLL REVEAL ---
