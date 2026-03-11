@@ -335,20 +335,48 @@
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
     }
+    .hero-portrait {
+      position: absolute;
+      top: 0; right: 0;
+      width: 52%; height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-portrait img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    /* Fade the portrait into the dark left side */
+    .hero-portrait::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to right, rgba(8,8,8,1) 0%, rgba(8,8,8,0.3) 40%, transparent 100%);
+      pointer-events: none;
+    }
+    /* On mobile: hide portrait, use slide as full-bleed bg */
+    @media (max-width: 768px) {
+      .hero-portrait { display: none; }
+    }
 
     .hero-slide {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
-      opacity: 0; transition: opacity 1.2s ease;
+      opacity: 0;
     }
     .hero-slide.active { opacity: 1; }
+    .hero-slide:nth-child(1) { opacity: 1 !important; }
     @media (max-width: 768px) {
       .hero-slide { transition: none !important; }
       .hero-slide:nth-child(1) { opacity: 1 !important; }
       .hero-slide:nth-child(2), .hero-slide:nth-child(3) { opacity: 0 !important; display: none; }
     }
-    .hero-slide:nth-child(1) { background-image: url('hero22.jpg'); background-size: cover; background-position: center top; }
-    .hero-slide:nth-child(2) { background-image: url('hero22.jpg'); background-size: cover; background-position: center; }
+    .hero-slide:nth-child(1) { background-image: url('mobHero.png'); background-size: cover; background-position: center top; }
+    @media (min-width: 769px) {
+      .hero-slide:nth-child(1) { background-image: none; background-color: var(--black); }
+    }
+    .hero-slide:nth-child(2), .hero-slide:nth-child(3) { display: none; }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
       background:
@@ -1557,6 +1585,10 @@
       <div class="hero-slide active"></div>
       <div class="hero-slide"></div>
       <div class="hero-slide"></div>
+      <!-- Desktop portrait image on right -->
+      <div class="hero-portrait" aria-hidden="true">
+        <img src="mobHero.png" alt="" />
+      </div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-geo-lines"></div>
@@ -2327,17 +2359,7 @@
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // --- HERO SLIDESHOW (desktop only) ---
-    const slides = document.querySelectorAll('.hero-slide');
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (!prefersReducedMotion && !isMobile && slides.length > 1) {
-      let current = 0;
-      setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-      }, 5000);
-    }
+    // Hero slideshow disabled — static hero.png
 
     // --- ABOUT INTERIOR SLIDESHOW ---
     const aboutSlides = document.querySelectorAll('.about-slide');
