@@ -339,6 +339,11 @@
       opacity: 0; transition: opacity 1.2s ease;
     }
     .hero-slide.active { opacity: 1; }
+    @media (max-width: 768px) {
+      .hero-slide { transition: none !important; }
+      .hero-slide:nth-child(1) { opacity: 1 !important; }
+      .hero-slide:nth-child(2), .hero-slide:nth-child(3) { opacity: 0 !important; display: none; }
+    }
     .hero-slide:nth-child(1) { background-image: url('hero.png'); background-size: cover; background-position: center top; }
     .hero-slide:nth-child(2) { background-image: url('hero2.jpg'); background-size: cover; background-position: center; }
     .hero-overlay {
@@ -346,6 +351,11 @@
       background:
         linear-gradient(to right, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.85) 35%, rgba(8,8,8,0.3) 65%, rgba(8,8,8,0.0) 100%),
         linear-gradient(to top, rgba(8,8,8,0.75) 0%, rgba(8,8,8,0.1) 30%, transparent 60%);
+    }
+    @media (max-width: 768px) {
+      .hero-overlay {
+        background: linear-gradient(to top, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.75) 50%, rgba(8,8,8,0.5) 100%);
+      }
     }
     .hero-geo-lines {
       position: absolute; inset: 0; z-index: 1; overflow: hidden;
@@ -403,13 +413,33 @@
     }
     .hero-ctas { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
     .hero-cta-main { width: 100%; justify-content: center; }
-    .hero-ctas-row2 { display: flex; gap: 10px; }
+    .hero-ctas-row2 { display: flex; gap: 24px; align-items: center; justify-content: flex-start; width: 100%; }
+    .hero-plain-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--white2);
+      font-family: var(--font-display);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      transition: color 0.3s;
+      background: none; border: none; padding: 0;
+      clip-path: none;
+    }
+    .hero-plain-link:hover { color: var(--white); }
+    .hero-call-plain .call-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      filter: sepia(1) saturate(5) hue-rotate(320deg);
+      transition: border-color 0.3s;
+    }
+    .hero-call-plain:hover .call-icon { border-color: var(--red); }
     .hero-cta-half { flex: 1; justify-content: center; }
     /* Desktop: row layout */
     @media (min-width: 769px) {
       .hero-ctas { flex-direction: row; align-items: center; flex-wrap: wrap; }
       .hero-cta-main { width: auto; }
-      .hero-ctas-row2 { flex: 0 0 auto; }
+      .hero-ctas-row2 { flex: 0 0 auto; width: auto; }
       .hero-cta-half { flex: 0 0 auto; }
     }
     .hero-call-btn {
@@ -998,23 +1028,14 @@
       position: relative;
     }
     @media (max-width: 768px) {
-      #photo-strip {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      #photo-strip::-webkit-scrollbar { display: none; }
-      #photo-strip .strip-track {
-        animation: none;
-      }
-      #photo-strip .strip-item {
-        scroll-snap-align: start;
-      }
+      #photo-strip { overflow: hidden; }
+      .strip-item { width: 180px; height: 130px; }
     }
     .strip-track {
       display: flex; gap: 4px;
       animation: strip 16s linear infinite;
+      width: max-content;
+      will-change: transform;
     }
     .strip-track:hover { animation-play-state: paused; }
     @keyframes strip { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -1385,15 +1406,25 @@
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       #about, #services, #plans, #programs, #transformations, #whyus, #reviews { padding: 80px 0; }
-      .hero-eyebrow { display: none; }
+      .hero-eyebrow { display: inline-flex; font-size: 9px; letter-spacing: 0.18em; }
       .hero-content { padding: 80px 0 50px !important; }
       .hero-ctas { flex-direction: column; }
       .hero-stats { gap: 16px; }
-      .hero-stat { padding-right: 10px; margin-right: 10px; border-right-width: 1px; }
+      /* hero-stat overridden by grid above */
       .hero-stat .val { font-size: 16px; }
       .hero-stat .lbl { font-size: 9px; letter-spacing: 0.04em; }
-      .hero-stats { flex-wrap: nowrap; overflow-x: auto; gap: 0; scrollbar-width: none; }
-      .hero-stats::-webkit-scrollbar { display: none; }
+      .hero-stats {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        flex-wrap: unset; overflow-x: unset; gap: 0;
+        width: 100%;
+      }
+      .hero-stat {
+        padding: 0 !important; margin: 0 !important;
+        align-items: center; text-align: center;
+        border-right: 1px solid var(--border);
+      }
+      .hero-stat:last-child { border-right: none; }
       .trans-item { width: 190px; height: 260px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
@@ -1493,8 +1524,8 @@
         <div class="hero-ctas">
           <button type="button" class="btn-primary hero-cta-main" onclick="openModal('General')">Start Your Journey →</button>
           <div class="hero-ctas-row2">
-            <a href="#about" class="btn-outline hero-cta-half">Explore Club</a>
-            <a href="tel:+919539443090" class="hero-call-btn hero-cta-half">
+            <a href="#about" class="hero-plain-link">Explore Club</a>
+            <a href="tel:+919539443090" class="hero-plain-link hero-call-plain">
               <span class="call-icon">📞</span>
               <span>Call Us Now</span>
             </a>
@@ -2231,9 +2262,10 @@
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // --- HERO SLIDESHOW ---
+    // --- HERO SLIDESHOW (desktop only) ---
     const slides = document.querySelectorAll('.hero-slide');
-    if (!prefersReducedMotion && slides.length > 1) {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (!prefersReducedMotion && !isMobile && slides.length > 1) {
       let current = 0;
       setInterval(() => {
         slides[current].classList.remove('active');
