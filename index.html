@@ -2,17 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fitox Fitness Club | Premium Unisex Gym in Karunagappally</title>
   <meta name="description" content="Transform your physique at Karunagappally's top-rated fitness hub. Expert personal training, high-end equipment, and dedicated women's fitness at Hospital Junction." />
-  <meta name="keywords" content="Fitox Fitness Club, Gym in Karunagappally, Best Unisex Gym Kollam, Ladies Fitness Karunagappally, Personal Trainer Karunagappally" />
-  <link rel="canonical" id="canonical-link" href="/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="Fitox Fitness Club" />
+  <meta name="language" content="en-IN" />
+  <link rel="canonical" href="https://fitox-beta.vercel.app/" />
+  <link rel="alternate" hreflang="en-IN" href="https://fitox-beta.vercel.app/" />
+  <link rel="alternate" hreflang="x-default" href="https://fitox-beta.vercel.app/" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo1.png" />
+  <link rel="preload" as="image" href="mobHero.png" fetchpriority="high" />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Fitox Fitness Club | Premium Unisex Gym in Karunagappally" />
   <meta property="og:description" content="Transform your physique at Karunagappally's top-rated fitness hub. Expert personal training, high-end equipment, and dedicated women's fitness at Hospital Junction." />
-  <meta property="og:url" id="og-url" content="/" />
-  <meta property="og:image" id="og-image" content="logo.png" />
+  <meta property="og:url" content="https://fitox-beta.vercel.app/" />
+  <meta property="og:site_name" content="Fitox Fitness Club" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:image" content="https://fitox-beta.vercel.app/hero.png" />
+  <meta property="og:image:alt" content="Fitox Fitness Club - premium gym in Karunagappally" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fitox Fitness Club | Premium Unisex Gym in Karunagappally" />
+  <meta name="twitter:description" content="Expert personal training, advanced equipment, and dedicated ladies fitness in Karunagappally." />
+  <meta name="twitter:image" content="https://fitox-beta.vercel.app/hero.png" />
   <!-- Geo Tags -->
   <meta name="geo.region" content="IN-KL" />
   <meta name="geo.placename" content="Karunagappally" />
@@ -29,8 +45,10 @@
   {
     "@context": "https://schema.org",
     "@type": "ExerciseGym",
+    "@id": "https://fitox-beta.vercel.app/#business",
     "name": "Fitox Fitness Club",
-    "image": "https://yourdomain.com/logo.png",
+    "image": "https://fitox-beta.vercel.app/logo.png",
+    "description": "Premium unisex gym in Karunagappally with expert trainers, strength training, cardio, and transformation programs.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Hospital Junction",
@@ -44,14 +62,31 @@
       "latitude": 9.0643632,
       "longitude": 76.5349748
     },
-    "url": "https://yourdomain.com",
+    "url": "https://fitox-beta.vercel.app/",
+    "hasMap": "https://www.google.com/maps/place/FITOX+FITNESS+CLUB/@9.0643632,76.5349748,17z/data=!3m1!4b1!4m6!3m5!1s0x3b060339dad4aee5:0x2e14c414efb2faec!8m2!3d9.0643632!4d76.5349748!16s%2Fg%2F11h39z_7pz!5m1!1e4?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D",
     "telephone": "+91-9539443090",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "05:30",
-      "closes": "21:30"
-    }
+    "priceRange": "₹₹",
+    "sameAs": [
+      "https://wa.me/919539443090"
+    ],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "05:30",
+        "closes": "21:30"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://fitox-beta.vercel.app/#website",
+    "url": "https://fitox-beta.vercel.app/",
+    "name": "Fitox Fitness Club",
+    "inLanguage": "en-IN"
   }
   </script>
 
@@ -2319,17 +2354,6 @@
   <script>
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    // Keep SEO URL metadata aligned to current host/path.
-    const pageUrl = `${window.location.origin}${window.location.pathname}`;
-    const canonical = document.getElementById('canonical-link');
-    const ogUrl = document.getElementById('og-url');
-    const ogImage = document.getElementById('og-image');
-    if (canonical) canonical.href = pageUrl;
-    if (ogUrl) ogUrl.content = pageUrl;
-    if (ogImage && ogImage.content && !ogImage.content.startsWith('http')) {
-      ogImage.content = `${window.location.origin}/${ogImage.content.replace(/^\/+/, '')}`;
-    }
 
     const startDateInput = document.getElementById('f-start');
     if (startDateInput) startDateInput.min = new Date().toISOString().split('T')[0];
