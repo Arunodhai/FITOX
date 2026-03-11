@@ -326,7 +326,7 @@
     #hero {
       position: relative; height: 100vh; min-height: 600px;
       display: flex; flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       overflow: hidden;
     }
     @supports (height: 100svh) {
@@ -385,7 +385,7 @@
     }
     @media (max-width: 768px) {
       .hero-overlay {
-        background: linear-gradient(to top, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.82) 60%, rgba(8,8,8,0.4) 100%);
+        background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.92) 50%, rgba(0,0,0,0.78) 80%, rgba(0,0,0,0.55) 100%);
       }
     }
     .hero-geo-lines {
@@ -403,7 +403,7 @@
     }
     .hero-content {
       position: relative; z-index: 2;
-      padding: 70px 0 60px;
+      padding: 80px 0 56px;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 12px;
@@ -1486,6 +1486,7 @@
       .container { padding: 0 20px; }
       #about, #services, #plans, #programs, #transformations, #whyus, #reviews { padding: 80px 0; }
       .hero-eyebrow { display: inline-flex; font-size: 9px; letter-spacing: 0.18em; }
+      #hero { justify-content: center !important; }
       .hero-content { padding: 72px 0 56px !important; }
       .hero-ctas { flex-direction: column; }
       .hero-stats { gap: 16px; }
