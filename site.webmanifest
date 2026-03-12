@@ -1,0 +1,25 @@
+{
+  "name": "Fitox Fitness Club",
+  "short_name": "Fitox",
+  "description": "Premium unisex gym in Karunagappally with expert trainers, strength training, cardio, and transformation programs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#D00000",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo1.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "en-IN",
+  "categories": ["fitness", "health", "sports"]
+}
